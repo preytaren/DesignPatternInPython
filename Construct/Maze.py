@@ -93,9 +93,13 @@ def createMaze():
 
     return maze
 
-if __name__ == '__main__':
-    maze = createMaze()
+
+def walk_through_maze(maze):
     room1 = maze.get_room(1)
     room1.enter()
     section = room1.get_side('North')
     section.enter()
+
+if __name__ == '__main__':
+    maze = createMaze()
+    walk_through_maze(maze)

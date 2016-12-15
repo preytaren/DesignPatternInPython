@@ -1,3 +1,11 @@
+# -*- encoding=utf-8 -*-
+"""
+AbstractFactory 模式
+抽象工厂模式通过对同一组接口提供不同的实现，达到对于一组
+产品的替换，常见的例子是QQ空间的各种主题，每一种主题对应
+一个工厂对象，当你切换主题时就切换了所有组件的显示方式，
+但是实际进行显示的模块并不知道切换的存在。
+"""
 from Construct.Maze import Door, Wall, Maze, Room, walk_through_maze
 
 

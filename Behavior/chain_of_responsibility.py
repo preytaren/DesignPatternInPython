@@ -21,6 +21,7 @@ class HandlerA(Handler):
         if hasattr(obj, 'A'):
             print 'Handled by A'
         else:
+            print 'Send to successor from A'
             self._successor.handle(obj)
 
 
@@ -30,6 +31,7 @@ class HandlerB(Handler):
         if hasattr(obj, 'B'):
             print 'Handled by B'
         else:
+            print 'Send to successor from B'
             self._successor.handle(object)
 
 
@@ -39,19 +41,39 @@ class HandlerBase(Handler):
         print 'Handled by Base Handler'
 
 
-class foo(object):
+class Foo(object):
     pass
 
 
-if __name__ ==  '__main__':
+def non_chain_of_res_use_case():
+    def run(obj):
+        if hasattr(obj, 'A'):
+            print 'Handled by A'
+        elif hasattr(obj, 'B'):
+            print 'Handled by B'
+        else:
+            print 'Handled by Base Handler'
+
+    bar = Foo()
+    bar.B = 'A'
+    run(bar)
+
+
+def chain_of_res_use_case():
     handler_base = HandlerBase(None)
     handler_b = HandlerB(handler_base)
     handler_a = HandlerA(handler_b)
 
-    bar = foo()
+    bar = Foo()
+    bar.B = 'A'
     handler_a.handle(bar)
 
-    bar.A = 'A'
-    handler_a.handle(bar)
+
+if __name__ ==  '__main__':
+    non_chain_of_res_use_case()
+
+    chain_of_res_use_case()
+
+
 
 
